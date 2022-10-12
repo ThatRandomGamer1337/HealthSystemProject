@@ -59,6 +59,8 @@ namespace HealthSystemProject
             liveCounter(1);
             ShowHUD();
 
+            UnitTest();
+
             Console.ReadKey();
 
             // Simulated Gameplay
@@ -170,7 +172,7 @@ namespace HealthSystemProject
         
         static void UnitTest()
         {
-            
+            ShowHUD();
         }
     }
 }
