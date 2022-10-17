@@ -25,10 +25,10 @@ namespace HealthSystemProject
             int doublePoints;
             int triplePoints;
 
-            //- - -
+            //- - - - - - -
 
-            health = 99;
-            lives = 1;
+            health = 91;
+            lives = 3;
             shields = 100;
             score = 0;
 
@@ -39,31 +39,39 @@ namespace HealthSystemProject
             doublePoints = 2;
             triplePoints = 3;
 
-            //- - -
+            //- - - - - - -
 
             // Simulated Gameplay
 
-            ShowHUD();
+            ShowHUD(); // Establishes the default hud to make sure all the values are properly registered.
 
-            damageCounting(enemyDamage);
+
+            damageCounting(enemyDamage); // Testing the Damage Output.
             ScoreCounting(enemyValue, regularPoints);
-            ShowHUD();
-           
-
-            heal(200);
+            ScoreCounting(enemyValue, doublePoints); // Testing the Points System and the multipliers.
+            ScoreCounting(enemyValue, triplePoints);
             ShowHUD();
 
-            shieldRegen(30);
+
+            heal(10); // Testing the Healing Mechanic.
             ShowHUD();
 
-            liveCounter(1);
+
+            shieldRegen(30); // Testing the Shield Regeneration.
             ShowHUD();
 
-            UnitTest();
+
+            damageCounting(10); // Testing the Error Message.
+            liveCounter(1); // Testing the Lives system.
+            ShowHUD();
+
+
 
             Console.ReadKey();
 
             // Simulated Gameplay
+
+            //- - - - - - -
 
         }
 
@@ -84,21 +92,36 @@ namespace HealthSystemProject
 
         static void ScoreCounting(int points, int multiplyer)
         {
+
+            if (points < 0)
+            {
+                points = 0;
+                Console.WriteLine("ERROR: Negative Value Detected. Reverting Value to 0. I wonder how that happened."); // prevents negative numbers
+            }
+
             score = score + points;
             score = score * multiplyer;
+
+            points = points * multiplyer;
 
 
             Console.WriteLine("Gained " + points + " points!");
 
         }
 
-        static void damageCounting(int damage) // WIP Damage System.
+        static void damageCounting(int damage) // WIP Damage System. WIP because the player takes double damage than the shields do
         {
+           if (damage < 0)
+            {
+                damage = 0;
+                Console.WriteLine("ERROR: Negative Value Detected. Reverting Value to 0. I wonder how that happened."); // prevents negative numbers
+            }
+
             reservedamage = 0;
 
             shields = shields - damage;
 
-            if (shields < 0)
+            if (shields <= 0)
             {
                 reservedamage = damage - shields;
                 health = (health - reservedamage);
@@ -120,6 +143,13 @@ namespace HealthSystemProject
         }
         static void liveCounter(int lostLife) // Lost a life Device (retrofit to allow recovering as well).
         {
+
+            if (lostLife < 0)
+            {
+                lostLife = 0;
+                Console.WriteLine("ERROR: Negative Value Detected. Reverting Value to 0. I wonder how that happened."); // prevents negative numbers
+            }
+
             lives = lives - lostLife;
 
             if (lives <= 0) // If your lives hit 0, you d i e.
@@ -147,6 +177,12 @@ namespace HealthSystemProject
 
         static void heal(int healing) // Player gets healed.
         {
+            if (healing < 0)
+            {
+                healing = 0;
+                Console.WriteLine("ERROR: Negative Value Detected. Reverting Value to 0. I wonder how that happened."); // prevents negative numbers
+            }
+
             health = health + healing;
 
             if (health > 100) // prevents you from overhealing past 100 health.
@@ -160,6 +196,12 @@ namespace HealthSystemProject
 
         static void shieldRegen(int regen) // Player regens shields.
         {
+            if (regen < 0)
+            {
+                regen = 0;
+                Console.WriteLine("ERROR: Negative Value Detected. Reverting Value to 0. I wonder how that happened."); // prevents negative numbers
+            }
+
             shields = shields + regen;
 
             if (shields > 100) // prevents overshielding yourself past 100 shield.
