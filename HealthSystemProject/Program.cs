@@ -31,7 +31,7 @@ namespace HealthSystemProject
             shields = 100;
             score = 0;
 
-            enemyDamage = 100;
+            enemyDamage = 10;
             enemyValue = 10;
 
             regularPoints = 1;
@@ -43,7 +43,6 @@ namespace HealthSystemProject
             // Simulated Gameplay
 
             ShowHUD(); // Establishes the default hud to make sure all the values are properly registered.
-
 
             damageCountingShields(enemyDamage); // Testing the Damage Output.
             ScoreCounting(enemyValue, regularPoints);
@@ -57,15 +56,12 @@ namespace HealthSystemProject
             heal(10); // Testing the Healing Mechanic.
             ShowHUD();
 
-
             shieldRegen(30); // Testing the Shield Regeneration.
             ShowHUD();
 
             damageCountingShields(-10); // Testing one of the many established Error Messages.
             liveCounter(1); // Testing the Lives system.
             ShowHUD();
-
-
 
             Console.ReadKey();
 
@@ -74,7 +70,6 @@ namespace HealthSystemProject
             //- - - - - - -
 
         }
-
         
         //V V V Methods and Values and Calculations V V V
         static void ShowHUD() // The HUD System itself.
@@ -90,7 +85,7 @@ namespace HealthSystemProject
             Console.WriteLine();
         }
 
-        static void ScoreCounting(int points, int multiplyer)
+        static void ScoreCounting(int points, int multiplyer) // Calculates the score the player gets
         {
 
             if (points < 0)
