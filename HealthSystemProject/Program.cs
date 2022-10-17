@@ -13,7 +13,6 @@ namespace HealthSystemProject
         static int shields;
         static int lives;
         static int score;
-        static int reservedamage;
 
         static void Main(string[] args)
         {
@@ -27,12 +26,12 @@ namespace HealthSystemProject
 
             //- - - - - - -
 
-            health = 91;
+            health = 100;
             lives = 3;
             shields = 100;
             score = 0;
 
-            enemyDamage = 15;
+            enemyDamage = 100;
             enemyValue = 10;
 
             regularPoints = 1;
@@ -46,12 +45,14 @@ namespace HealthSystemProject
             ShowHUD(); // Establishes the default hud to make sure all the values are properly registered.
 
 
-            damageCounting(enemyDamage); // Testing the Damage Output.
+            damageCountingShields(enemyDamage); // Testing the Damage Output.
             ScoreCounting(enemyValue, regularPoints);
             ScoreCounting(enemyValue, doublePoints); // Testing the Points System and the multipliers.
             ScoreCounting(enemyValue, triplePoints);
             ShowHUD();
 
+            damageCountingHealth(enemyDamage);
+            ShowHUD();
 
             heal(10); // Testing the Healing Mechanic.
             ShowHUD();
@@ -60,8 +61,7 @@ namespace HealthSystemProject
             shieldRegen(30); // Testing the Shield Regeneration.
             ShowHUD();
 
-
-            damageCounting(10); // Testing the Error Message.
+            damageCountingShields(-10); // Testing one of the many established Error Messages.
             liveCounter(1); // Testing the Lives system.
             ShowHUD();
 
@@ -75,8 +75,8 @@ namespace HealthSystemProject
 
         }
 
-        //- - - the funny values and methods and stuff
-
+        
+        //V V V Methods and Values and Calculations V V V
         static void ShowHUD() // The HUD System itself.
         {
             Console.WriteLine("{ - - - }");
@@ -109,7 +109,7 @@ namespace HealthSystemProject
 
         }
 
-        static void damageCounting(int damage) // WIP Damage System. WIP because the player takes double damage than the shields do
+        static void damageCountingShields(int damage) // Damage when applied to Shields.
         {
            if (damage < 0)
             {
@@ -117,29 +117,56 @@ namespace HealthSystemProject
                 Console.WriteLine("ERROR: Negative Value Detected. Reverting Value to 0. I wonder how that happened."); // prevents negative numbers
             }
 
-            reservedamage = 0;
-
             shields = shields - damage;
 
-            if (shields <= 0)
+            Console.WriteLine("You have taken " + damage + " damage to your shields!");
+
+        if (shields < 0)
             {
-                reservedamage = damage - shields;
-                health = (health - reservedamage);
-
                 shields = 0;
-                reservedamage = 0;
 
-                if (health < 0)
-                {
-                    health = 0;
-                }
+                Console.WriteLine("Shields have flared! You'll need energy cores in order to restore their power!"); // This causes access damage to be removed.
+            }
+        }
+        static void damageCountingHealth(int damage)
+        {
+            if (damage < 0)
+            {
+                damage = 0;
+                Console.WriteLine("ERROR: Negative Value Detected. Reverting Value to 0. I wonder how that happened."); // prevents negative numbers
             }
 
-            reservedamage = 0;
+            health = health - damage;
 
+            Console.WriteLine("You have taken " + damage + " hull damage!");
 
-            Console.WriteLine("You have taken " + damage + " damage!");
-        
+            if (health > 100)
+            {
+                Console.WriteLine("Systems Fully Operational!");
+            }
+
+            if (health > 75)
+            {
+                Console.WriteLine("Systems Operational!");
+            }
+           
+            if (health > 50)
+            {
+                Console.WriteLine("Systems Damaged!");
+            }
+
+            if (health > 25)
+            {
+                Console.WriteLine("Systems Severely Damaged!");
+            }
+
+            if (health < 0)
+            {
+                health = 0;
+
+                Console.WriteLine("Systems Critical! I repeat, Systems Critical!");
+            }
+
         }
         static void liveCounter(int lostLife) // Lost a life Device (retrofit to allow recovering as well).
         {
