@@ -146,34 +146,33 @@ namespace HealthSystemProject
 
         health = health - damage;
 
-            if (health > 100)
+            if (health < 100)
             {
-                Console.WriteLine("Systems Fully Operational!");
+                Console.WriteLine("Systems Fully Operational! Taken " + damage + " hull damage!");
             }
 
-            if (health > 75)
+            if (health < 75)
             {
-                Console.WriteLine("Systems Operational!");
+                Console.WriteLine("Systems Operational! Taken " + damage + " hull damage!");
             }
            
-            if (health > 50)
+            if (health < 50)
             {
-                Console.WriteLine("Systems Damaged!");
+                Console.WriteLine("Systems Damaged! Taken " + damage + " hull damage!");
             }
 
-            if (health > 25)
+            if (health < 25)
             {
-                Console.WriteLine("Systems Severely Damaged!");
+                Console.WriteLine("Systems Severely Damaged! Taken " + damage + " hull damage!");
             }
 
             if (health < 0)
             {
                 health = 0;
 
-                Console.WriteLine("Systems Critical! I repeat, Systems Critical!");
+                Console.WriteLine("Systems Critical! I repeat, Systems Critical! Taken " + damage + " hull damage!");
             }
             
-        Console.WriteLine("You have taken " + damage + " hull damage!");
 
         }
         static void liveCounter(int lostLife) // Lost a life Device (retrofit to allow recovering as well).
