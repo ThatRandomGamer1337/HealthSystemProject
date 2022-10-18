@@ -32,7 +32,7 @@ namespace HealthSystemProject
             shields = 100;
             score = 0;
 
-            enemyDamage = 10;
+            enemyDamage = 15;
             enemyValue = 10;
 
             regularPoints = 1;
