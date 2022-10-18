@@ -63,6 +63,9 @@ namespace HealthSystemProject
             liveCounter(1); // Testing the Lives system.
             ShowHUD();
 
+            ResetValues();
+            ShowHUD();
+
             Console.ReadKey();
 
             // Simulated Gameplay
@@ -237,6 +240,15 @@ namespace HealthSystemProject
         static void UnitTest()
         {
             ShowHUD();
+        }
+
+        static void ResetValues()
+        {
+            health = 100;
+            shields = 100;
+            lives = 3;
+            score = 0;
+            Console.WriteLine("Resetting Values...");
         }
     }
 }
