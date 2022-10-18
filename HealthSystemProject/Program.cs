@@ -76,7 +76,7 @@ namespace HealthSystemProject
             //- - - - - - -
 
         }
-        
+
         //V V V Methods and Values and Calculations V V V
         static void ShowHUD() // The HUD System itself.
         {
